@@ -1,6 +1,6 @@
 import { MapPin, Phone, Car, Bike, Quote, CheckCircle2, ChevronRight, Menu, X, ArrowRight, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const WHATSAPP_NUMBER = "918237960809";
 const PREFILLED_MESSAGE = "Hello! I'm interested in your tour/rental service. Please share details.";
@@ -445,21 +445,73 @@ function Destinations() {
       name: "Guhagar",
       tagline: "Untouched beach paradise",
       attractions: ["Guhagar Beach", "Shree Vyadeshwar Temple, Guhagar", "Velneshwar Beach", "Gopalgad"],
-      image: "https://vl-prod-static.b-cdn.net/system/images/000/829/540/54bd44cd7036674ad2e0fbe896742ec2/original/Guhagar-Turtle-Festival-Tour-Mischief-Treks__1_.jpg"
+      image: "https://www.mischieftreks.com/Guhagar-turtle-festival-from-mumbai.jpg",
+      imageClassName: "object-contain bg-gray-900"
     },
     {
       name: "Malvan",
       tagline: "Adventure & Seafood",
-      attractions: ["Sindhudurg Fort", "Scuba Diving", "Tarkarli Beach"],
-      image: "https://images.unsplash.com/photo-1598091383021-15ddea10925d?q=80&w=2670&auto=format&fit=crop"
+      attractions: ["Kunkeshwar Mandir", "Vijaydurg Fort", "Devgad Windmills", "Pokharbav Ganpati Mandir", "Rajkot Fort", "Tarkarli Beach", "Rock Garden", "Redi Ganpati Temple", "Sawantwadi Palace", "Sindhudurg Fort"],
+      image: "https://vl-prod-static.b-cdn.net/system/images/000/788/253/dceaa4a8ff0095416fb6a065390ff1a7/original/safeimagekit-myoffice.png"
     },
     {
-      name: "Goa",
+      name: "North Goa",
       tagline: "The ultimate getaway",
-      attractions: ["North Goa Beaches", "Old Goa Churches", "Dudhsagar Falls"],
+      attractions: ["Baga Beach", "Fort Aguada", "Anjuna Beach", "Chapora Fort", "Calangute Beach"],
       image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=2574&auto=format&fit=crop"
+    },
+    {
+      name: "South Goa",
+      tagline: "Serene & Peaceful",
+      attractions: ["Palolem Beach", "Dudhsagar Falls", "Colva Beach", "Cabo de Rama Fort", "Butterfly Beach"],
+      image: "https://cf-images.assettype.com/newindianexpress/2026-01-28/jz2vw99v/C3B7C286273F4F50BE048AE8BC00593Fconvertedwebpfinal.jpg"
     }
   ];
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { current } = scrollRef;
+      const scrollAmount = direction === 'left' ? -400 : 400;
+      current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const [selectedDest, setSelectedDest] = useState<any>(null);
+
+  const getAttractionPhoto = (attr: string, index: number) => {
+    const specificImages: Record<string, string> = {
+      "Ganapatipule": "https://www.incredibleindia-tourism.org/images/weekend-getaways/ganapatipule-ratnagiri.jpg",
+      "Thiba Palace": "https://cdnbbsr.s3waas.gov.in/s3cb2c2041d9763d84d7d655e81178f444/uploads/2019/04/202412192147101591.jpg",
+      "Palolem Beach": "https://www.holidify.com/images/cmsuploads/compressed/Palolem_Beach_20191225134710.jpg",
+      "Dudhsagar Falls": "https://www.holidify.com/images/cmsuploads/compressed/shutterstock_1400262449_20191024174312_20200331160359.jpg",
+      "Colva Beach": "https://www.holidify.com/images/cmsuploads/compressed/Colva_Beach_20191225141014.jpg",
+      "Cabo de Rama Fort": "https://www.holidify.com/images/bgImages/CABO-DE-RAMA-FORT.jpg",
+      "Butterfly Beach": "https://www.holidify.com/images/cmsuploads/compressed/shutterstock_1189332151_20191024174246.jpg",
+      "Baga Beach": "https://www.holidify.com/images/cmsuploads/compressed/Baga_Beach_20191225144136.jpg",
+      "Fort Aguada": "https://www.holidify.com/images/cmsuploads/compressed/Fort-Aguada-Goa_20191225140344.jpg",
+      "Anjuna Beach": "https://www.holidify.com/images/cmsuploads/compressed/Anjuna_Beach_20191225140228.jpg",
+      "Chapora Fort": "https://www.holidify.com/images/cmsuploads/compressed/Chapora_Fort_20191225135402.jpg",
+      "Calangute Beach": "https://www.holidify.com/images/bgImages/CALANGUTE-BEACH.jpg",
+      "Guhagar Beach": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Guhagar_Beach%2C_Maharashtra.jpg/1200px-Guhagar_Beach%2C_Maharashtra.jpg",
+      "Sindhudurg Fort": "https://www.holidify.com/images/cmsuploads/compressed/sindhudurg-fort3_20191217145749.jpg",
+      "Tarkarli Beach": "https://www.holidify.com/images/cmsuploads/compressed/2360580970_e09d1396b7_z_20191217150116.jpg"
+    };
+
+    if (specificImages[attr]) {
+      return specificImages[attr];
+    }
+    const images = [
+      "https://images.unsplash.com/photo-1596895111956-bf57059e00fa?auto=format&fit=crop&q=80&w=400&h=300",
+      "https://images.unsplash.com/photo-1588631526435-0b0c679a9572?auto=format&fit=crop&q=80&w=400&h=300",
+      "https://images.unsplash.com/photo-1565576721538-4b71190623d3?auto=format&fit=crop&q=80&w=400&h=300",
+      "https://images.unsplash.com/photo-1549479424-df399c53641b?auto=format&fit=crop&q=80&w=400&h=300",
+      "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&q=80&w=400&h=300",
+      "https://images.unsplash.com/photo-1534346856017-d5d10522197f?auto=format&fit=crop&q=80&w=400&h=300"
+    ];
+    return images[index % images.length];
+  };
 
   return (
     <section id="destinations" className="py-24 bg-white overflow-hidden relative">
@@ -478,16 +530,25 @@ function Destinations() {
             </p>
           </motion.div>
           <div className="hidden md:flex gap-2">
-            <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-konkan-teal hover:border-konkan-teal transition-colors">
+            <button 
+              onClick={() => scroll('left')}
+              className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-konkan-teal hover:border-konkan-teal transition-colors"
+            >
               <ChevronRight className="w-6 h-6 rotate-180" />
             </button>
-            <button className="w-12 h-12 rounded-full bg-konkan-teal flex items-center justify-center text-white hover:bg-konkan-teal-dark transition-colors">
+            <button 
+              onClick={() => scroll('right')}
+              className="w-12 h-12 rounded-full bg-konkan-teal flex items-center justify-center text-white hover:bg-konkan-teal-dark transition-colors"
+            >
               <ChevronRight className="w-6 h-6" />
             </button>
           </div>
         </div>
 
-        <div className="flex overflow-x-auto hide-scrollbar gap-6 pb-8 snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0">
+        <div 
+          ref={scrollRef}
+          className="flex overflow-x-auto hide-scrollbar gap-6 pb-8 snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0"
+        >
           {destinations.map((dest, idx) => (
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
@@ -495,13 +556,14 @@ function Destinations() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
               key={idx} 
+              onClick={() => setSelectedDest(dest)}
               className="min-w-[320px] md:min-w-[400px] shrink-0 snap-start group cursor-pointer relative rounded-2xl overflow-hidden aspect-[3/4]"
             >
               <img 
                 src={dest.image} 
                 alt={dest.name} 
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                className={`absolute inset-0 w-full h-full sm:pointer-events-auto transition-transform duration-1000 group-hover:scale-110 ${dest.imageClassName || 'object-cover'}`}
               />
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
@@ -510,28 +572,92 @@ function Destinations() {
                 <span className="text-konkan-gold font-medium tracking-wide text-sm mb-2 transform opacity-100 translate-y-0 transition-all duration-300">{dest.tagline}</span>
                 <h3 className="font-serif text-4xl text-white font-bold mb-4">{dest.name}</h3>
                 
-                <div className="space-y-3 mb-0 max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-[300px] group-hover:mb-6 group-hover:opacity-100">
-                  {dest.attractions.map((attr, i) => (
-                    <div key={i} className="flex items-center text-white/90 text-sm font-medium">
-                      <CheckCircle2 className="w-4 h-4 text-konkan-amber mr-3 shrink-0" />
-                      {attr}
-                    </div>
-                  ))}
+                <div className="flex flex-wrap gap-3 mt-4 opacity-100 sm:opacity-0 sm:translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                  <a 
+                    href={WHATSAPP_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="bg-white text-konkan-teal px-5 py-2.5 rounded-full font-semibold inline-flex items-center justify-center transition-colors hover:bg-gray-100 w-max text-sm"
+                  >
+                    Plan This Trip <ChevronRight className="w-4 h-4 ml-1" />
+                  </a>
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedDest(dest);
+                    }}
+                    className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-5 py-2.5 rounded-full font-medium inline-flex items-center justify-center transition-colors hover:bg-white/20 w-max text-sm"
+                  >
+                    Explore More
+                  </button>
                 </div>
-
-                <a 
-                  href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full font-medium inline-flex items-center justify-center transition-colors hover:bg-white hover:text-konkan-teal w-max"
-                >
-                  Plan This Trip <ChevronRight className="w-4 h-4 ml-1" />
-                </a>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
+
+      <AnimatePresence>
+        {selectedDest && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-md"
+          >
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              className="bg-white w-full max-w-4xl max-h-[90vh] rounded-3xl overflow-hidden flex flex-col shadow-2xl relative"
+            >
+              <div className="relative h-48 sm:h-64 shrink-0 p-6 flex flex-col justify-end">
+                <img 
+                  src={selectedDest.image} 
+                  alt={selectedDest.name}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-90"></div>
+                
+                <button 
+                  onClick={() => setSelectedDest(null)}
+                  className="absolute top-4 right-4 w-10 h-10 bg-black/20 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-gray-900 transition-colors z-20"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                
+                <div className="relative z-10">
+                  <span className="text-konkan-gold font-medium tracking-wide text-sm mb-2 block">{selectedDest.tagline}</span>
+                  <h3 className="font-serif text-3xl sm:text-4xl text-white font-bold">{selectedDest.name} Places</h3>
+                </div>
+              </div>
+              
+              <div className="flex-1 overflow-y-auto p-6 sm:p-8 bg-gray-50/50">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {selectedDest.attractions.map((attr: string, i: number) => (
+                    <div key={i} className="group cursor-pointer rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                      <div className="aspect-[4/3] overflow-hidden relative">
+                        <img 
+                          src={getAttractionPhoto(attr, i)} 
+                          alt={attr} 
+                          loading="lazy"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/10 to-transparent opacity-80"></div>
+                        <div className="absolute bottom-4 left-4 right-4 flex items-start">
+                          <MapPin className="w-5 h-5 text-konkan-amber mr-2 shrink-0 mt-0.5" />
+                          <h4 className="text-white font-medium text-base sm:text-lg leading-tight break-words">{attr}</h4>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
