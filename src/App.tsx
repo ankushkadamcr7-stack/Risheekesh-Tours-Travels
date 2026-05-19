@@ -1,10 +1,23 @@
-import { MapPin, Phone, Car, Bike, Quote, CheckCircle2, ChevronRight, Menu, X, ArrowRight, Star } from 'lucide-react';
+import { MapPin, Phone, Car, Bike, Quote, CheckCircle2, ChevronRight, Menu, X, ArrowRight, Star, Facebook } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect, useRef } from 'react';
 
 const WHATSAPP_NUMBER = "918237960809";
 const PREFILLED_MESSAGE = "Hello! I'm interested in your tour/rental service. Please share details.";
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(PREFILLED_MESSAGE)}`;
+
+function WhatsappIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 24 24" 
+      fill="currentColor" 
+      {...props}
+    >
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+    </svg>
+  );
+}
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -57,7 +70,7 @@ function Navbar() {
               className="bg-green-500 hover:bg-green-600 text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-lg shadow-green-500/30 flex items-center gap-2 hover:-translate-y-0.5 relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-white/20 -translate-x-[150%] skew-x-12 group-hover:animate-shine"></div>
-              <Phone className="w-4 h-4" />
+              <WhatsappIcon className="w-4 h-4" />
               Book on WhatsApp
             </a>
           </div>
@@ -99,7 +112,7 @@ function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="bg-green-500 text-white px-6 py-3 rounded-full font-medium text-center flex items-center justify-center gap-2 mt-4"
               >
-                <Phone className="w-5 h-5" />
+                <WhatsappIcon className="w-5 h-5" />
                 Book Now on WhatsApp
               </a>
             </div>
@@ -159,7 +172,7 @@ function Hero() {
                 className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold text-center flex items-center justify-center gap-2 transition-transform hover:-translate-y-1 shadow-lg shadow-green-500/40 relative overflow-hidden group whitespace-nowrap"
               >
                 <div className="absolute inset-0 bg-white/20 -translate-x-[150%] skew-x-12 group-hover:animate-shine"></div>
-                <Phone className="w-5 h-5 fill-current" />
+                <WhatsappIcon className="w-5 h-5 fill-current" />
                 WhatsApp Us
               </a>
             </div>
@@ -221,19 +234,25 @@ function Services() {
       title: "Scooty & Bike Rental",
       desc: "Perfect for navigating the scenic coastal roads and local spots freely without worrying about parking or traffic.",
       icon: Bike,
-      image: "https://yatrabike.com/wp-content/uploads/2024/09/about.jpg"
+      image: "https://yatrabike.com/wp-content/uploads/2024/09/about.jpg",
+      actionLink: "#fleet",
+      actionText: "View Fleet"
     },
     {
       title: "Car Rental",
       desc: "Comfortable sedans and SUVs for family trips, outstation travel, and long coastal drives along the Konkan route.",
       icon: Car,
-      image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2670&auto=format&fit=crop"
+      image: "https://www.vpltravels.com/wp-content/uploads/2024/05/Car-Rental-Chennai.webp",
+      actionLink: "#fleet-cars",
+      actionText: "View Fleet"
     },
     {
       title: "Tour Packages",
       desc: "Curated multi-day itineraries covering the best of Maharashtra's coast, tailored precisely to your preferences.",
       icon: MapPin,
-      image: "https://images.unsplash.com/photo-1623126908029-58cb08a2b272?q=80&w=2669&auto=format&fit=crop"
+      image: "https://www.budgetholidaysindia.com/package/package_5.jpg",
+      actionLink: "#destinations",
+      actionText: "View Destinations"
     }
   ];
 
@@ -282,14 +301,24 @@ function Services() {
               <div className="p-8 flex-1 flex flex-col">
                 <h3 className="font-serif text-2xl font-bold text-gray-900 mb-3">{service.title}</h3>
                 <p className="text-gray-600 mb-8 font-sans flex-1">{service.desc}</p>
-                <a 
-                  href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-konkan-teal font-bold hover:text-konkan-amber transition-colors mt-auto group/btn"
-                >
-                  Enquire on WhatsApp <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                </a>
+                <div className="mt-auto flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+                  {service.actionLink && (
+                    <a 
+                      href={service.actionLink}
+                      className="inline-flex items-center text-konkan-teal font-bold hover:text-konkan-amber transition-colors group/btn"
+                    >
+                      {service.actionText} <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                    </a>
+                  )}
+                  <a 
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello! I'm interested in your ${service.title} service. Please share details.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-sm font-bold text-gray-900 hover:text-konkan-teal underline decoration-2 underline-offset-4 transition-colors"
+                  >
+                    Enquire on WhatsApp
+                  </a>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -301,6 +330,22 @@ function Services() {
 
 function Fleet() {
   const [activeTab, setActiveTab] = useState<'scooters' | 'cars'>('scooters');
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#fleet-cars') {
+        setActiveTab('cars');
+      } else if (window.location.hash === '#fleet') {
+        setActiveTab('scooters');
+      }
+    };
+    
+    // Initial check
+    handleHashChange();
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   const fleetData = {
     scooters: [
@@ -348,6 +393,7 @@ function Fleet() {
 
   return (
     <section id="fleet" className="py-24 bg-white relative">
+      <div id="fleet-cars" className="absolute top-0"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.div
@@ -417,7 +463,7 @@ function Fleet() {
                 </ul>
                 
                 <a 
-                  href={WHATSAPP_LINK}
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello! I'm interested in booking the ${vehicle.name}. Please share details.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-auto px-6 py-3.5 rounded-xl border border-gray-900 text-gray-900 font-bold hover:bg-gray-900 hover:text-white transition-colors text-sm w-full text-center"
@@ -590,7 +636,7 @@ function Destinations() {
                 
                 <div className="flex flex-wrap gap-3 mt-4 opacity-100 sm:opacity-0 sm:translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
                   <a 
-                    href={WHATSAPP_LINK}
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello! I'm interested in planning a trip to ${dest.name}. Please share details.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
@@ -835,7 +881,7 @@ function AboutAndContact() {
                   rel="noopener noreferrer"
                   className="bg-green-500 text-white px-8 py-4 rounded-full font-bold text-center flex items-center justify-center gap-3 hover:-translate-y-1 transition-all shadow-lg shadow-green-500/30 text-lg group"
                 >
-                  <Phone className="w-6 h-6 group-hover:animate-bounce" />
+                  <WhatsappIcon className="w-6 h-6 group-hover:animate-bounce" />
                   Chat With Us Now
                 </a>
               </div>
@@ -860,39 +906,51 @@ function AboutAndContact() {
             </div>
           </motion.div>
 
-          {/* Map */}
+          {/* Image and Map Container */}
           <motion.div 
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="rounded-[2.5rem] overflow-hidden h-[600px] shadow-2xl relative group"
+            className="flex flex-col gap-6"
           >
-            <div className="absolute inset-0 bg-konkan-teal-dark/0 group-hover:bg-transparent transition-colors z-10 pointer-events-none"></div>
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121703.62635639641!2d73.23847551065171!3d16.99434863953503!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bea0d1839a6bc0b%3A0x7ceea09ac379e4d!2sRatnagiri%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1709405020120!5m2!1sen!2sin" 
-              className="border-0 w-full h-full grayscale-[15%] group-hover:grayscale-0 transition-all duration-700"
-              allowFullScreen={false} 
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-            
-            {/* Floating Card over Map */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[90%] bg-white/95 backdrop-blur shadow-xl rounded-2xl p-6 flex items-center justify-between z-20 hover:scale-[1.02] transition-transform">
-              <div>
-                <h4 className="font-bold text-gray-900">Risheekesh Tours & Travels</h4>
-                <p className="text-sm text-gray-600 flex items-center gap-2 mt-1">
-                  <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                  4.9 Top Rated in Ratnagiri
-                </p>
+            {/* Image */}
+            <div className="rounded-[2.5rem] overflow-hidden h-[300px] shadow-2xl relative group bg-black flex items-center justify-center">
+              <img 
+                src="https://lh3.googleusercontent.com/p/AF1QipPVfoHczgsYUkfY1IkvtE5Q_abmq3nxE-Vb0w14=w800-h800-k-no" 
+                alt="Risheekesh Tours & Travels" 
+                className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+          
+            {/* Map */}
+            <div className="rounded-[2.5rem] overflow-hidden h-[300px] shadow-2xl relative group">
+              <div className="absolute inset-0 bg-konkan-teal-dark/0 group-hover:bg-transparent transition-colors z-10 pointer-events-none"></div>
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15291.688849646549!2d73.28400030501869!3d16.9944944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bea0d7520f18ebd%3A0x22c6aac62a560c0a!2sRisheekesh%20Tours%20%26%20Travels!5e0!3m2!1sen!2sin!4v1716301298453!5m2!1sen!2sin" 
+                className="border-0 w-full h-full grayscale-[15%] group-hover:grayscale-0 transition-all duration-700"
+                allowFullScreen={false} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+              
+              {/* Floating Card over Map */}
+              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[90%] bg-white/95 backdrop-blur shadow-xl rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 z-20 hover:scale-[1.02] transition-transform">
+                <div className="text-center sm:text-left">
+                  <h4 className="font-bold text-gray-900">Risheekesh Tours & Travels</h4>
+                  <p className="text-sm text-gray-600 flex items-center justify-center sm:justify-start gap-2 mt-1">
+                    <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                    4.9 Top Rated in Ratnagiri
+                  </p>
+                </div>
+                <a 
+                  href="https://www.google.com/maps/place/Risheekesh+Tours+%26+Travels+.../@16.9944944,73.2942182,3a,75y,90t" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="bg-blue-50 hover:bg-blue-100 text-blue-600 px-4 py-2 rounded-lg font-medium text-sm transition-colors whitespace-nowrap"
+                >
+                  View on Google
+                </a>
               </div>
-              <a 
-                href="https://share.google/T2vbJKs7WyMgrFBVs" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="bg-blue-50 hover:bg-blue-100 text-blue-600 px-4 py-2 rounded-lg font-medium text-sm transition-colors whitespace-nowrap"
-              >
-                View on Google
-              </a>
             </div>
           </motion.div>
         </div>
@@ -925,13 +983,33 @@ function Footer() {
             <p className="text-gray-300 max-w-sm mb-6 leading-relaxed">
               Your premium travel partner in the Konkan. Specialized in quality car rentals, bike rentals, and unforgettable tour packages tailored to your wanderlust.
             </p>
-            <div className="flex space-x-4">
-              {/* Social Placeholders */}
-              {[1,2,3].map(i => (
-                <div key={i} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-konkan-amber transition-colors cursor-pointer">
-                  <span className="w-4 h-4 bg-white/50 rounded-sm"></span>
-                </div>
-              ))}
+            <div className="flex flex-wrap items-center gap-4">
+              <a 
+                href="https://www.facebook.com/61572506159769" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a 
+                href={WHATSAPP_LINK} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-colors"
+                aria-label="WhatsApp"
+              >
+                <WhatsappIcon className="w-5 h-5 fill-current" />
+              </a>
+              <a 
+                href="tel:8237960809" 
+                className="h-10 px-4 rounded-full bg-white/10 flex items-center justify-center hover:bg-konkan-amber hover:text-white transition-colors gap-2 font-medium"
+                aria-label="Phone"
+              >
+                <Phone className="w-4 h-4" />
+                8237960809
+              </a>
             </div>
           </div>
 
@@ -1012,7 +1090,7 @@ function FloatingWhatsApp() {
               Chat with us
               <div className="absolute top-1/2 -right-2 -translate-y-1/2 border-8 border-transparent border-l-white"></div>
             </div>
-            <Phone className="w-7 h-7 relative z-10 fill-current" />
+            <WhatsappIcon className="w-7 h-7 relative z-10 fill-current" />
           </a>
         </motion.div>
       )}
