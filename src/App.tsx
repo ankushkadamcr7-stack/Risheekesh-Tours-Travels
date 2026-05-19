@@ -41,7 +41,7 @@ function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
-            {['Home', 'Services', 'Destinations', 'About', 'Contact'].map((item) => (
+            {['Home', 'Services', 'Fleet', 'Destinations', 'About', 'Contact'].map((item) => (
               <a 
                 href={item === 'Home' ? '#' : `#${item.toLowerCase()}`} 
                 key={item}
@@ -82,7 +82,7 @@ function Navbar() {
             className="md:hidden bg-white border-t mt-3 overflow-hidden"
           >
             <div className="px-4 py-6 flex flex-col space-y-4">
-              {['Home', 'Services', 'Destinations', 'About', 'Contact'].map((item) => (
+              {['Home', 'Services', 'Fleet', 'Destinations', 'About', 'Contact'].map((item) => (
                 <a 
                   href={item === 'Home' ? '#' : `#${item.toLowerCase()}`} 
                   key={item}
@@ -112,14 +112,14 @@ function Navbar() {
 
 function Hero() {
   return (
-    <div className="relative min-h-[100vh] flex items-center pt-20 overflow-hidden">
+    <div className="relative min-h-[100vh] flex items-center pt-20 pb-24 md:pb-12 overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <motion.img 
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ duration: 2, ease: "easeOut" }}
-          src="https://images.unsplash.com/photo-1625723044792-44de16ccb4e9?q=80&w=2670&auto=format&fit=crop" 
+          src="https://universallandmarks.com/wp-content/uploads/2023/11/konkan.jpg" 
           alt="Coastal Ratnagiri" 
           className="w-full h-full object-cover"
         />
@@ -127,8 +127,8 @@ function Hero() {
         {/* Soft grain overlay for cinematic feel */}
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 mix-blend-overlay"></div>
       </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-32 md:pb-24 mt-12 md:mt-0">
         <div className="max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -139,24 +139,24 @@ function Hero() {
               📍 Based in Ratnagiri, Maharashtra
             </div>
             <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white leading-[1.1] mb-6 shadow-sm">
-              Explore the <span className="text-konkan-gold italic block mt-2">Konkan Coast</span> Like Never Before.
+              Explore the <span className="text-konkan-gold italic">Konkan Coast</span> Like Never Before.
             </h1>
             <p className="font-sans text-lg md:text-xl text-white/90 mb-10 max-w-xl leading-relaxed text-balance drop-shadow-md">
               Premium Bike Rentals, Car Rentals, and Custom Tour Packages starting from Ratnagiri to anywhere you desire.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4">
               <a 
-                href="#services"
-                className="bg-white text-konkan-teal-dark px-8 py-4 rounded-full font-bold text-center transition-transform hover:-translate-y-1 shadow-xl"
+                href="#destinations"
+                className="bg-white text-konkan-teal-dark px-8 py-4 rounded-full font-bold text-center transition-transform hover:-translate-y-1 shadow-xl whitespace-nowrap"
               >
-                View Packages
+                Explore Konkan
               </a>
               <a 
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold text-center flex items-center justify-center gap-2 transition-transform hover:-translate-y-1 shadow-lg shadow-green-500/40 relative overflow-hidden group"
+                className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold text-center flex items-center justify-center gap-2 transition-transform hover:-translate-y-1 shadow-lg shadow-green-500/40 relative overflow-hidden group whitespace-nowrap"
               >
                 <div className="absolute inset-0 bg-white/20 -translate-x-[150%] skew-x-12 group-hover:animate-shine"></div>
                 <Phone className="w-5 h-5 fill-current" />
@@ -221,7 +221,7 @@ function Services() {
       title: "Scooty & Bike Rental",
       desc: "Perfect for navigating the scenic coastal roads and local spots freely without worrying about parking or traffic.",
       icon: Bike,
-      image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=2670&auto=format&fit=crop"
+      image: "https://yatrabike.com/wp-content/uploads/2024/09/about.jpg"
     },
     {
       title: "Car Rental",
@@ -484,19 +484,35 @@ function Destinations() {
     const specificImages: Record<string, string> = {
       "Ganapatipule": "https://www.incredibleindia-tourism.org/images/weekend-getaways/ganapatipule-ratnagiri.jpg",
       "Thiba Palace": "https://cdnbbsr.s3waas.gov.in/s3cb2c2041d9763d84d7d655e81178f444/uploads/2019/04/202412192147101591.jpg",
-      "Palolem Beach": "https://www.holidify.com/images/cmsuploads/compressed/Palolem_Beach_20191225134710.jpg",
-      "Dudhsagar Falls": "https://www.holidify.com/images/cmsuploads/compressed/shutterstock_1400262449_20191024174312_20200331160359.jpg",
-      "Colva Beach": "https://www.holidify.com/images/cmsuploads/compressed/Colva_Beach_20191225141014.jpg",
-      "Cabo de Rama Fort": "https://www.holidify.com/images/bgImages/CABO-DE-RAMA-FORT.jpg",
-      "Butterfly Beach": "https://www.holidify.com/images/cmsuploads/compressed/shutterstock_1189332151_20191024174246.jpg",
-      "Baga Beach": "https://www.holidify.com/images/cmsuploads/compressed/Baga_Beach_20191225144136.jpg",
-      "Fort Aguada": "https://www.holidify.com/images/cmsuploads/compressed/Fort-Aguada-Goa_20191225140344.jpg",
-      "Anjuna Beach": "https://www.holidify.com/images/cmsuploads/compressed/Anjuna_Beach_20191225140228.jpg",
-      "Chapora Fort": "https://www.holidify.com/images/cmsuploads/compressed/Chapora_Fort_20191225135402.jpg",
-      "Calangute Beach": "https://www.holidify.com/images/bgImages/CALANGUTE-BEACH.jpg",
-      "Guhagar Beach": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Guhagar_Beach%2C_Maharashtra.jpg/1200px-Guhagar_Beach%2C_Maharashtra.jpg",
-      "Sindhudurg Fort": "https://www.holidify.com/images/cmsuploads/compressed/sindhudurg-fort3_20191217145749.jpg",
-      "Tarkarli Beach": "https://www.holidify.com/images/cmsuploads/compressed/2360580970_e09d1396b7_z_20191217150116.jpg"
+      "Ratnadurg Fort": "https://im.whatshot.in/img/2020/Feb/ratndurg-or-bhagavati-fort-body-07-ratnadurg-cropped-1582530746.jpg",
+      "Pawas": "https://www.holidify.com/images/cmsuploads/compressed/shutterstock_782851378(1)_20191209175921.jpg",
+      "Jaigad Fort": "https://preview.redd.it/jaigad-fort-near-ratnagiri-india-v0-qikxh0edrpke1.jpeg?auto=webp&s=396ef8e6503e22e35d840e512de143ba257e47d9",
+      "Mandavi Beach": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjv13bVhHLSSNPC5l21JQNb0aTTxeCd0MV1UOoYxy1JrtRDGLIVWkc4ODEecwhoKgvJzw4BISOKHEoJfsrgzTdPQohb_xwklvPaGO51WDKWdyMgc3jLTVEWrqYQ1ocCK-StPLzQTFM0czt6/s1600/IMG_20181105_213334.JPG",
+      "Bhatye Beach": "https://media.assettype.com/outlooktraveller/2024-08-21/yjbxc33u/Mandvi_Ratnagiri_03.png?w=718&auto=format%2Ccompress&fit=max&format=webp&dpr=1.0",
+      "Palolem Beach": "https://goa-tourism.org.in/images/places-to-visit/headers/palolem-beach-goa-timings-entry-fee-goa-tourism-header-cr-manfred-sommer-02.jpg",
+      "Dudhsagar Falls": "https://imgmediagumlet.lbb.in/media/2021/10/6165b8de6a9fc04e3f38c58c_1634056414914.jpg",
+      "Colva Beach": "https://media.tripinvites.com/places/goa/colva-beach/colva-beach-front-view-featured-750x500.webp",
+      "Cabo de Rama Fort": "https://goa-tourism.org.in/images/v2/places-to-visit/cabo-de-rama-fort-goa-tourism-header.jpg",
+      "Butterfly Beach": "https://d10y46cwh6y6x1.cloudfront.net/images/AD3A7000-A54E-4048-86B1-1CF529409A79.png",
+      "Baga Beach": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/3e/36/95/baga-sea-beach.jpg?w=800&h=-1&s=1",
+      "Fort Aguada": "https://bpu-images-v1.s3.eu-north-1.amazonaws.com/uploads/1721475767022_360_F_736024358_ATkuOSjyZYJOZLhVqbsFVsmJayWpZVpV.jpg",
+      "Anjuna Beach": "https://www.tourmyindia.com/states/goa/image/anjuna-beach-banner.webp",
+      "Chapora Fort": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDljLKCR5dCipfDbmAQtV61CAqHsYCj0Sz8iIkPfVqyGU6-ul2dhrsYIiIFXpYl3n1g1QiRDVh91-Mq_Egfhe1LnvcVCXmUtuVIAnOUXX7swR_njL38OhEauNUm1pd5nhQCqUEu9UE6iM/s1600/chapora-fort-goa-+1.jpg",
+      "Calangute Beach": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/529922113.jpg?k=b60ee9deb7cd3e62891afcff134987f3a33ae6c40d68c872a739d33a6ec06dcb&o=&hp=1",
+      "Guhagar Beach": "https://static.wixstatic.com/media/cbf5ad_40aa396daef9456e8f5d1cba788d4d8a~mv2.jpg/v1/fill/w_280,h_187,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/cbf5ad_40aa396daef9456e8f5d1cba788d4d8a~mv2.jpg",
+      "Shree Vyadeshwar Temple, Guhagar": "https://ak-d.tripcdn.com/images/0ww29120008zcoyicF2D7_C_480_270_R5_Q70.jpg_.webp",
+      "Velneshwar Beach": "https://xploringdestinations.com/wp-content/uploads/2025/08/Velneshwar-Temple-timings.jpg",
+      "Gopalgad": "https://forttrekkers.com/images/fort/pune/Rajmachi.jpg",
+      "Kunkeshwar Mandir": "https://www.tourmyindia.com/images/kunkeshwar-temple1.jpg",
+      "Vijaydurg Fort": "https://aroundpune.com/wp-content/uploads/2018/10/Vijaydurg_Banner.jpg",
+      "Devgad Windmills": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Devgad_beach.jpg/960px-Devgad_beach.jpg",
+      "Pokharbav Ganpati Mandir": "https://marathi.cdn.zeenews.com/marathi/sites/default/files/2024/01/24/698256-pokharbavghh.jpg",
+      "Rajkot Fort": "https://media.assettype.com/freepressjournal/2025-06-15/lek7achd/PTI05112025000175B.jpg",
+      "Rock Garden": "https://www.tourmyindia.com/states/maharashtra/images/rock-garden-malvan1.jpg",
+      "Redi Ganpati Temple": "https://www.templepurohit.com/wp-content/uploads/2015/11/114.jpg",
+      "Sawantwadi Palace": "https://sawantwadipalace.com/img/21.c954be1b.webp",
+      "Sindhudurg Fort": "http://konkancrown.com/wp-content/uploads/2023/02/Sindhu-durg-fort-1.jpg",
+      "Tarkarli Beach": "http://www.tripplatform.com/blog/wp-content/uploads/2015/12/Tarkarli-Beach-1.jpg"
     };
 
     if (specificImages[attr]) {
@@ -923,6 +939,7 @@ function Footer() {
             <h4 className="font-bold text-lg mb-6 text-white tracking-wide">Quick Links</h4>
             <ul className="space-y-4 text-gray-300">
               <li><a href="#services" className="hover:text-konkan-gold transition-colors inline-block">Our Services</a></li>
+              <li><a href="#fleet" className="hover:text-konkan-gold transition-colors inline-block">Our Fleet</a></li>
               <li><a href="#destinations" className="hover:text-konkan-gold transition-colors inline-block">Top Destinations</a></li>
               <li><a href="#about" className="hover:text-konkan-gold transition-colors inline-block">Our Story</a></li>
               <li><a href="#contact" className="hover:text-konkan-gold transition-colors inline-block">Book with Us</a></li>
