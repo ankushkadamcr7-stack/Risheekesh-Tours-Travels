@@ -897,9 +897,9 @@ function AboutAndContact() {
                 <div className="h-10 w-px bg-gray-300 hidden sm:block"></div>
                 <div>
                   <p className="text-sm text-gray-500 font-medium mb-1">Location</p>
-                  <div className="flex items-center gap-3 text-konkan-teal-dark font-bold">
-                    <MapPin className="w-5 h-5 text-konkan-amber shrink-0" />
-                    <span>Ratnagiri, MH</span>
+                  <div className="flex items-start gap-3 text-konkan-teal-dark font-bold">
+                    <MapPin className="w-5 h-5 text-konkan-amber shrink-0 mt-0.5" />
+                    <span className="text-sm font-medium leading-tight max-w-[250px] text-balance">Radhakrishna naka, Ram Ali Road, Belbag, Police Head Quarters, Ratnagiri, Maharashtra 415612</span>
                   </div>
                 </div>
               </div>
@@ -1004,11 +1004,10 @@ function Footer() {
               </a>
               <a 
                 href="tel:8237960809" 
-                className="h-10 px-4 rounded-full bg-white/10 flex items-center justify-center hover:bg-konkan-amber hover:text-white transition-colors gap-2 font-medium"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-konkan-amber hover:text-white transition-colors"
                 aria-label="Phone"
               >
-                <Phone className="w-4 h-4" />
-                8237960809
+                <Phone className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -1029,7 +1028,7 @@ function Footer() {
             <ul className="space-y-5 text-gray-300">
               <li className="flex items-start gap-4">
                 <MapPin className="w-5 h-5 text-konkan-amber shrink-0 mt-1" />
-                <span>Ratnagiri, Maharashtra,<br/>India</span>
+                <span>Radhakrishna naka, Ram Ali Road, Belbag,<br/>Police Head Quarters, Ratnagiri,<br/>Maharashtra 415612</span>
               </li>
               <li className="flex items-center gap-4">
                 <Phone className="w-5 h-5 text-konkan-amber shrink-0" />
