@@ -119,11 +119,11 @@ function Hero() {
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ duration: 2, ease: "easeOut" }}
-          src="https://universallandmarks.com/wp-content/uploads/2023/11/konkan.jpg" 
+          src="https://www.incredibleindia-tourism.org/images/weekend-getaways/ganapatipule-ratnagiri.jpg" 
           alt="Coastal Ratnagiri" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-konkan-teal-dark/95 via-konkan-teal-dark/80 to-konkan-teal-dark/30 mix-blend-multiply"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-konkan-teal-dark/70 via-konkan-teal-dark/40 to-transparent"></div>
         {/* Soft grain overlay for cinematic feel */}
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 mix-blend-overlay"></div>
       </div>
