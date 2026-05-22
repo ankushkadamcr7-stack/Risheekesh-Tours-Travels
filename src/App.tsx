@@ -1,4 +1,4 @@
-import { MapPin, Phone, Car, Bike, Quote, CheckCircle2, ChevronRight, Menu, X, ArrowRight, Star, Facebook } from 'lucide-react';
+import { MapPin, Phone, Car, Bike, Quote, CheckCircle2, ChevronRight, Menu, X, ArrowRight, Star, Facebook, Mail, User, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect, useRef } from 'react';
 
@@ -73,6 +73,13 @@ function Navbar() {
               <WhatsappIcon className="w-4 h-4" />
               Book on WhatsApp
             </a>
+            <a 
+              href="#contact"
+              className="bg-konkan-teal hover:bg-white hover:text-konkan-teal-dark text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-lg border border-transparent hover:border-konkan-teal-dark flex items-center gap-2 hover:-translate-y-0.5 relative overflow-hidden group"
+            >
+              <Mail className="w-4 h-4" />
+              Enquiry
+            </a>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -95,16 +102,29 @@ function Navbar() {
             className="md:hidden bg-white border-t mt-3 overflow-hidden"
           >
             <div className="px-4 py-6 flex flex-col space-y-4">
-              {['Home', 'Services', 'Fleet', 'Destinations', 'About', 'Contact'].map((item) => (
-                <a 
-                  href={item === 'Home' ? '#' : `#${item.toLowerCase()}`} 
-                  key={item}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="font-sans text-lg font-medium text-gray-800 py-2 border-b border-gray-100"
-                >
-                  {item}
-                </a>
-              ))}
+              {['Home', 'Services', 'Fleet', 'Destinations', 'About', 'Contact'].map((item) => {
+                const target = item === 'Home' ? '#' : `#${item.toLowerCase()}`;
+                return (
+                  <a 
+                    href={target} 
+                    key={item}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setMobileMenuOpen(false);
+                      setTimeout(() => {
+                        if (target !== '#') {
+                          document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' });
+                        } else {
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                      }, 150);
+                    }}
+                    className="font-sans text-lg font-medium text-gray-800 py-2 border-b border-gray-100"
+                  >
+                    {item}
+                  </a>
+                );
+              })}
               <a 
                 href={WHATSAPP_LINK}
                 target="_blank"
@@ -114,6 +134,20 @@ function Navbar() {
               >
                 <WhatsappIcon className="w-5 h-5" />
                 Book Now on WhatsApp
+              </a>
+              <a 
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMobileMenuOpen(false);
+                  setTimeout(() => {
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }, 150);
+                }}
+                className="bg-konkan-teal text-white px-6 py-3 rounded-full font-medium text-center flex items-center justify-center gap-2"
+              >
+                <Mail className="w-5 h-5" />
+                Send Enquiry
               </a>
             </div>
           </motion.div>
@@ -127,41 +161,73 @@ function Hero() {
   return (
     <div className="relative min-h-[100vh] flex items-center pt-20 pb-24 md:pb-12 overflow-hidden">
       {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-black">
         <motion.img 
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 2, ease: "easeOut" }}
-          src="https://www.incredibleindia-tourism.org/images/weekend-getaways/ganapatipule-ratnagiri.jpg" 
-          alt="Coastal Ratnagiri" 
-          className="w-full h-full object-cover"
+          initial={{ scale: 1 }}
+          animate={{ scale: 1.1 }}
+          transition={{ duration: 25, ease: "linear", repeat: Infinity, repeatType: "mirror" }}
+          src="https://images.unsplash.com/photo-1537956965359-7573183d1f57?auto=format&fit=crop&w=2000&q=80" 
+          alt="Beautiful coastal cliffs" 
+          className="w-full h-full object-cover opacity-90"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-konkan-teal-dark/70 via-konkan-teal-dark/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
         {/* Soft grain overlay for cinematic feel */}
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30 mix-blend-overlay"></div>
+        <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-black/80 to-transparent"></div>
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-32 md:pb-24 mt-12 md:mt-0">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-24 md:pb-16 mt-24 md:mt-32">
         <div className="max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
-            <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium tracking-wide mb-6">
-              📍 Based in Ratnagiri, Maharashtra
-            </div>
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white leading-[1.1] mb-6 shadow-sm">
-              Explore the <span className="text-konkan-gold italic">Konkan Coast</span> Like Never Before.
-            </h1>
-            <p className="font-sans text-lg md:text-xl text-white/90 mb-10 max-w-xl leading-relaxed text-balance drop-shadow-md">
-              Premium Bike Rentals, Car Rentals, and Custom Tour Packages starting from Ratnagiri to anywhere you desire.
-            </p>
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium tracking-wide mb-8 shadow-lg"
+            >
+              <MapPin className="w-4 h-4 text-konkan-amber" />
+              <span>Based in Ratnagiri, Maharashtra</span>
+            </motion.div>
             
-            <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+              className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] tracking-tight text-white leading-[1.05] mb-6 drop-shadow-2xl"
+            >
+              Explore the <span className="text-transparent bg-clip-text bg-gradient-to-r from-konkan-gold via-[#ffe893] to-konkan-gold italic relative inline-block pb-1">
+                Konkan Coast
+                <motion.span 
+                  className="absolute bottom-2 left-0 w-full h-1.5 bg-gradient-to-r from-konkan-gold to-[#fbd34d] rounded-full shadow-[0_0_15px_rgba(255,215,0,0.4)]"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 1.2, delay: 0.8, ease: "easeInOut" }}
+                  style={{ originX: 0 }}
+                ></motion.span>
+              </span> <br className="hidden sm:block" />Like Never Before.
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+              className="font-sans text-lg md:text-xl lg:text-2xl text-white/90 mb-10 max-w-xl leading-relaxed text-balance font-light drop-shadow-lg"
+            >
+              Premium Bike Rentals, Car Rentals, and Custom Tour Packages starting from Ratnagiri to anywhere you desire. <span className="font-medium text-white">Unleash your inner explorer.</span>
+            </motion.p>
+            
+            <motion.div 
+              className="flex flex-col sm:flex-row flex-wrap gap-5 items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+            >
               <a 
                 href="#destinations"
-                className="bg-white text-konkan-teal-dark px-8 py-4 rounded-full font-bold text-center transition-transform hover:-translate-y-1 shadow-xl whitespace-nowrap"
+                className="bg-white text-konkan-teal-dark px-8 py-4 rounded-full font-bold text-center transition-all hover:bg-konkan-sand hover:text-konkan-teal shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] hover:-translate-y-1 whitespace-nowrap"
               >
                 Explore Konkan
               </a>
@@ -169,19 +235,35 @@ function Hero() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold text-center flex items-center justify-center gap-2 transition-transform hover:-translate-y-1 shadow-lg shadow-green-500/40 relative overflow-hidden group whitespace-nowrap"
+                className="bg-[#25D366] hover:bg-[#1DA851] text-white px-8 py-4 rounded-full font-bold text-center flex items-center justify-center gap-2 transition-all hover:-translate-y-1 shadow-[0_0_20px_rgba(37,211,102,0.4)] hover:shadow-[0_0_30px_rgba(37,211,102,0.6)] relative overflow-hidden group whitespace-nowrap"
               >
-                <div className="absolute inset-0 bg-white/20 -translate-x-[150%] skew-x-12 group-hover:animate-shine"></div>
-                <WhatsappIcon className="w-5 h-5 fill-current" />
-                WhatsApp Us
+                <div className="absolute inset-0 bg-white/30 -translate-x-[150%] skew-x-12 group-hover:animate-shine transition-all duration-700"></div>
+                <WhatsappIcon className="w-6 h-6 fill-current relative z-10" />
+                <span className="relative z-10">WhatsApp Us</span>
               </a>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
 
+      {/* Down Arrow / Scroll Indicator */}
+      <motion.div 
+        className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-white/70 hidden md:flex"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+      >
+        <span className="text-xs font-medium tracking-widest uppercase">Scroll Down</span>
+        <motion.div 
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ArrowRight className="w-5 h-5 rotate-90" />
+        </motion.div>
+      </motion.div>
+
       {/* Marquee Banner Bottom */}
-      <div className="absolute bottom-0 w-full bg-konkan-teal-dark/90 backdrop-blur-md border-t border-white/10 overflow-hidden py-3">
+      <div className="absolute bottom-0 w-full bg-konkan-teal-dark/90 backdrop-blur-md border-t border-white/10 overflow-hidden py-3 z-30">
         <div className="flex whitespace-nowrap animate-[marquee_20s_linear_infinite]">
           {[...Array(8)].map((_, i) => (
             <span key={i} className="text-konkan-gold/90 font-serif lowercase tracking-widest text-sm mx-10 flex items-center gap-10">
@@ -485,14 +567,13 @@ function Destinations() {
       name: "Ratnagiri",
       tagline: "The heart of Konkan",
       attractions: ["Ganapatipule", "Thiba Palace", "Ratnadurg Fort", "Pawas", "Jaigad Fort", "Mandavi Beach", "Bhatye Beach"],
-      image: "https://st.indiarailinfo.com/kjfdsuiemjvcya22/0/1/7/0/4727170/0/img20200927224913442011.jpg"
+      image: "https://site.outlookindia.com/traveller/wp-content/uploads/files/2015/08/300615161943-RATNAGIRI1.jpg"
     },
     {
       name: "Guhagar",
       tagline: "Untouched beach paradise",
       attractions: ["Guhagar Beach", "Shree Vyadeshwar Temple, Guhagar", "Velneshwar Beach", "Gopalgad"],
-      image: "https://www.mischieftreks.com/Guhagar-turtle-festival-from-mumbai.jpg",
-      imageClassName: "object-contain bg-gray-900"
+      image: "https://www.snmcpn.org/wp-content/uploads/2026/04/guhagar-turtle-festival-background-color-1024x682.webp"
     },
     {
       name: "Malvan",
@@ -845,6 +926,114 @@ function Testimonials() {
   );
 }
 
+function InlineEnquiryForm() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [service, setService] = useState("");
+  const [specificService, setSpecificService] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleWhatsAppRedirect = (e: React.FormEvent) => {
+    e.preventDefault();
+    const serviceText = specificService ? `${service} - ${specificService}` : service;
+    const whatsappMessage = `Hello Risheekesh Tours & Travels!\n\n*Name:* ${name}\n*Contact:* ${phone}\n*Interest:* ${serviceText}\n*Message:* ${message}\n\nPlease get back to me.`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`, "_blank");
+  };
+
+  return (
+    <div className="bg-white rounded-[2.5rem] p-8 shadow-2xl border border-gray-100 h-full flex flex-col justify-center">
+      <h3 className="font-serif text-3xl text-konkan-teal-dark font-bold mb-2">Send an Enquiry</h3>
+      <p className="text-gray-500 mb-6 font-medium">We'll get back to you via WhatsApp.</p>
+      
+      <form onSubmit={handleWhatsAppRedirect} className="space-y-5">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+              <User className="w-5 h-5" />
+            </div>
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} required className="pl-10 w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-konkan-amber focus:border-transparent transition-all" placeholder="John Doe" />
+          </div>
+        </div>
+        
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+              <Phone className="w-5 h-5" />
+            </div>
+            <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="pl-10 w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-konkan-amber focus:border-transparent transition-all" placeholder="+91 XXXXX XXXXX" />
+          </div>
+        </div>
+        
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Service Category</label>
+          <select value={service} onChange={(e) => { setService(e.target.value); setSpecificService(""); }} required className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-konkan-amber focus:border-transparent transition-all bg-white">
+            <option value="">Select Service Category</option>
+            <option value="Tour Package">Tour Packages</option>
+            <option value="Car Rental">Car Rentals</option>
+            <option value="Bike Rental">Bike Rentals</option>
+          </select>
+        </div>
+
+        {service === "Tour Package" && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Specific Tour</label>
+            <select value={specificService} onChange={(e) => setSpecificService(e.target.value)} required className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-konkan-amber focus:border-transparent transition-all bg-white">
+              <option value="">Select Tour</option>
+              <option value="Kokan Darshan">Kokan Darshan (3-5 Days)</option>
+              <option value="Ganpatipule Tour">Ganpatipule Special</option>
+              <option value="Malvan Tarkali Tour">Malvan & Tarkali Adventure</option>
+              <option value="Custom Tour">Custom Itinerary</option>
+            </select>
+          </div>
+        )}
+
+        {service === "Car Rental" && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Vehicle Type</label>
+            <select value={specificService} onChange={(e) => setSpecificService(e.target.value)} required className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-konkan-amber focus:border-transparent transition-all bg-white">
+              <option value="">Select Vehicle</option>
+              <option value="Toyota Innova">Toyota Innova (SUV)</option>
+              <option value="Maruti Swift Dzire">Swift Dzire (Sedan)</option>
+              <option value="Maruti Ertiga">Maruti Ertiga (MUV)</option>
+              <option value="Tempo Traveller">Tempo Traveller (Group)</option>
+            </select>
+          </div>
+        )}
+
+        {service === "Bike Rental" && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Bike Preference</label>
+            <select value={specificService} onChange={(e) => setSpecificService(e.target.value)} required className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-konkan-amber focus:border-transparent transition-all bg-white">
+              <option value="">Select Bike</option>
+              <option value="Honda Activa">Honda Activa</option>
+              <option value="TVS Jupiter">TVS Jupiter</option>
+              <option value="Ather 450X">Ather 450X (Electric)</option>
+              <option value="Royal Enfield">Royal Enfield</option>
+            </select>
+          </div>
+        )}
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Message / Requirements</label>
+          <div className="relative">
+            <div className="absolute top-3 left-3 pointer-events-none text-gray-400">
+              <MessageSquare className="w-5 h-5" />
+            </div>
+            <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={3} className="pl-10 w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-konkan-amber focus:border-transparent transition-all resize-none" placeholder="Dates, number of people..."></textarea>
+          </div>
+        </div>
+        
+        <button type="submit" className="w-full bg-[#25D366] hover:bg-[#1DA851] cursor-pointer text-white font-bold px-6 py-4 rounded-xl mt-6 transition-colors shadow-lg shadow-green-500/20 flex justify-center items-center gap-2 text-lg">
+          <WhatsappIcon className="w-6 h-6" />
+          Send to WhatsApp
+        </button>
+      </form>
+    </div>
+  );
+}
+
 function AboutAndContact() {
   return (
     <section id="about" className="py-24 bg-white">
@@ -860,7 +1049,14 @@ function AboutAndContact() {
           >
             <div>
               <span className="text-konkan-amber font-bold tracking-widest text-sm uppercase mb-4 block">About Us</span>
-              <h2 className="font-serif text-4xl md:text-5xl text-konkan-teal-dark">Our Roots in Ratnagiri</h2>
+              <h2 className="font-serif text-4xl md:text-5xl text-konkan-teal-dark mb-6">Our Roots in Ratnagiri</h2>
+              <div className="w-full h-64 sm:h-80 overflow-hidden rounded-2xl shadow-lg mt-6 bg-[#fffbea] flex items-center justify-center p-2">
+                <img 
+                  src="https://lh3.googleusercontent.com/p/AF1QipNkSVzFGa2cuW7hW3gZGEb5LeLmOQ8yiSnhshPh=s0" 
+                  alt="About Risheekesh Tours" 
+                  className="w-full h-full object-contain hover:scale-105 transition-transform duration-700"
+                />
+              </div>
             </div>
             
             <div className="prose prose-lg text-gray-600 font-sans">
@@ -879,7 +1075,7 @@ function AboutAndContact() {
                   href={WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-green-500 text-white px-8 py-4 rounded-full font-bold text-center flex items-center justify-center gap-3 hover:-translate-y-1 transition-all shadow-lg shadow-green-500/30 text-lg group"
+                  className="bg-green-500 text-white px-8 py-4 rounded-full font-bold text-center flex items-center justify-center gap-3 hover:-translate-y-1 transition-all shadow-lg shadow-green-500/30 text-lg group w-full sm:w-auto"
                 >
                   <WhatsappIcon className="w-6 h-6 group-hover:animate-bounce" />
                   Chat With Us Now
@@ -889,10 +1085,10 @@ function AboutAndContact() {
               <div className="bg-konkan-sand p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <p className="text-sm text-gray-500 font-medium mb-1">Direct Line / WhatsApp</p>
-                  <div className="flex items-center gap-3 text-konkan-teal-dark font-bold text-xl md:text-2xl">
+                  <a href="tel:08237960809" className="flex items-center gap-3 text-konkan-teal-dark font-bold text-xl md:text-2xl hover:text-konkan-amber transition-colors">
                     <Phone className="w-5 h-5 text-konkan-amber" />
                     <span>08237960809</span>
-                  </div>
+                  </a>
                 </div>
                 <div className="h-10 w-px bg-gray-300 hidden sm:block"></div>
                 <div>
@@ -913,14 +1109,7 @@ function AboutAndContact() {
             viewport={{ once: true }}
             className="flex flex-col gap-6"
           >
-            {/* Image */}
-            <div className="rounded-[2.5rem] overflow-hidden h-[300px] shadow-2xl relative group bg-black flex items-center justify-center">
-              <img 
-                src="https://lh3.googleusercontent.com/p/AF1QipPVfoHczgsYUkfY1IkvtE5Q_abmq3nxE-Vb0w14=w800-h800-k-no" 
-                alt="Risheekesh Tours & Travels" 
-                className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
+            <InlineEnquiryForm />
           
             {/* Map */}
             <div className="rounded-[2.5rem] overflow-hidden h-[300px] shadow-2xl relative group">
@@ -1032,7 +1221,7 @@ function Footer() {
               </li>
               <li className="flex items-center gap-4">
                 <Phone className="w-5 h-5 text-konkan-amber shrink-0" />
-                <span className="font-medium">08237960809</span>
+                <a href="tel:08237960809" className="font-medium hover:text-konkan-amber transition-colors">08237960809</a>
               </li>
             </ul>
           </div>
@@ -1052,6 +1241,7 @@ function Footer() {
 
 function FloatingWhatsApp() {
   const [isVisible, setIsVisible] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -1066,6 +1256,18 @@ function FloatingWhatsApp() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    if (isVisible) {
+      timer = setTimeout(() => {
+        setShowPopup(true);
+      }, 2000);
+    } else {
+      setShowPopup(false);
+    }
+    return () => clearTimeout(timer);
+  }, [isVisible]);
+
   return (
     <AnimatePresence>
       {isVisible && (
@@ -1073,22 +1275,58 @@ function FloatingWhatsApp() {
            initial={{ opacity: 0, scale: 0.5, y: 50 }}
            animate={{ opacity: 1, scale: 1, y: 0 }}
            exit={{ opacity: 0, scale: 0.5, y: 50 }}
-           className="fixed bottom-6 right-6 z-[60]"
+           className="fixed bottom-6 right-6 z-[60] flex flex-col items-end"
         >
+          {/* Pop-up Message */}
+          <AnimatePresence>
+            {showPopup && (
+              <motion.div
+                initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8, y: 10 }}
+                className="mb-4 bg-white p-4 rounded-2xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.2)] max-w-[260px] relative border border-gray-100"
+              >
+                <button 
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowPopup(false); }} 
+                  className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 transition-colors bg-gray-50 rounded-full p-1"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center shrink-0">
+                    <img src="https://img.icons8.com/color/48/whatsapp--v1.png" className="w-6 h-6" alt="WhatsApp" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-800 text-sm">Need help? 🌴</h4>
+                    <p className="text-xs text-gray-500 mt-1 font-medium leading-relaxed">Chat with our local experts to plan your Konkan trip!</p>
+                  </div>
+                </div>
+                {/* Tail pointer */}
+                <div className="absolute -bottom-2 right-6 w-4 h-4 bg-white border-b border-r border-gray-100 rotate-45 shadow-[3px_3px_5px_-2px_rgba(0,0,0,0.1)]"></div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <a
             href={WHATSAPP_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-green-500 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform hover:bg-green-600 flex items-center justify-center group relative block"
+            className="bg-[#25d366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform hover:bg-[#20bd5a] flex items-center justify-center group relative block ml-auto mt-2"
           >
             {/* Ping animation behind */}
-            <span className="absolute inset-0 rounded-full bg-green-500 opacity-20 animate-ping"></span>
+            <span className="absolute inset-0 rounded-full bg-[#25d366] opacity-30 animate-ping"></span>
             
-            <div className="absolute right-full mr-4 bg-white text-gray-800 px-4 py-2 rounded-xl shadow-xl font-medium text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 group-hover:-translate-x-2 transition-all pointer-events-none flex items-center gap-2">
-              <img src="https://img.icons8.com/color/48/whatsapp--v1.png" className="w-5 h-5" alt="WhatsApp" />
-              Chat with us
-              <div className="absolute top-1/2 -right-2 -translate-y-1/2 border-8 border-transparent border-l-white"></div>
-            </div>
+            {!showPopup && (
+              <div className="absolute right-full mr-4 bg-white text-gray-800 px-4 py-2 rounded-xl shadow-xl font-medium text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 group-hover:-translate-x-2 transition-all pointer-events-none flex items-center gap-2">
+                 <span className="w-2 h-2 rounded-full bg-[#25d366] animate-pulse"></span>
+                Chat on WhatsApp
+                <div className="absolute top-1/2 -right-2 -translate-y-1/2 border-8 border-transparent border-l-white"></div>
+              </div>
+            )}
+            
+            {/* Notification Badge */}
+            <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full z-20 shadow-md border-2 border-white animate-bounce delay-1000">1</span>
+
             <WhatsappIcon className="w-7 h-7 relative z-10 fill-current" />
           </a>
         </motion.div>
