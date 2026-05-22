@@ -54,7 +54,7 @@ function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
-            {['Home', 'Services', 'Fleet', 'Destinations', 'About', 'Contact'].map((item) => (
+            {['Home', 'Services', 'Fleet', 'Destinations', 'About', 'FAQ', 'Enquiry'].map((item) => (
               <a 
                 href={item === 'Home' ? '#' : `#${item.toLowerCase()}`} 
                 key={item}
@@ -74,7 +74,7 @@ function Navbar() {
               Book on WhatsApp
             </a>
             <a 
-              href="#contact"
+              href="#enquiry"
               className="bg-konkan-teal hover:bg-white hover:text-konkan-teal-dark text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-lg border border-transparent hover:border-konkan-teal-dark flex items-center gap-2 hover:-translate-y-0.5 relative overflow-hidden group"
             >
               <Mail className="w-4 h-4" />
@@ -102,7 +102,7 @@ function Navbar() {
             className="md:hidden bg-white border-t mt-3 overflow-hidden"
           >
             <div className="px-4 py-6 flex flex-col space-y-4">
-              {['Home', 'Services', 'Fleet', 'Destinations', 'About', 'Contact'].map((item) => {
+              {['Home', 'Services', 'Fleet', 'Destinations', 'About', 'FAQ', 'Enquiry'].map((item) => {
                 const target = item === 'Home' ? '#' : `#${item.toLowerCase()}`;
                 return (
                   <a 
@@ -136,12 +136,12 @@ function Navbar() {
                 Book Now on WhatsApp
               </a>
               <a 
-                href="#contact"
+                href="#enquiry"
                 onClick={(e) => {
                   e.preventDefault();
                   setMobileMenuOpen(false);
                   setTimeout(() => {
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('enquiry')?.scrollIntoView({ behavior: 'smooth' });
                   }, 150);
                 }}
                 className="bg-konkan-teal text-white px-6 py-3 rounded-full font-medium text-center flex items-center justify-center gap-2"
@@ -216,7 +216,7 @@ function Hero() {
               transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
               className="font-sans text-lg md:text-xl lg:text-2xl text-white/90 mb-10 max-w-xl leading-relaxed text-balance font-light drop-shadow-lg"
             >
-              Premium Bike Rentals, Car Rentals, and Custom Tour Packages starting from Ratnagiri to anywhere you desire. <span className="font-medium text-white">Unleash your inner explorer.</span>
+              Premium Scooty Rentals, Car Rentals, and Custom Tour Packages starting from Ratnagiri to anywhere you desire. <span className="font-medium text-white">Unleash your inner explorer.</span>
             </motion.p>
             
             <motion.div 
@@ -879,6 +879,79 @@ function HowItWorks() {
   );
 }
 
+function FAQ() {
+  const faqs = [
+    {
+      question: "Do I need a valid driving license to rent a vehicle?",
+      answer: "Yes, a valid driving license is mandatory for all self-drive car and scooty rentals. You will need to provide a copy at the time of booking along with another ID proof."
+    },
+    {
+      question: "What is your fuel policy?",
+      answer: "We provide vehicles with a specific amount of fuel. You are expected to return the vehicle with the same fuel level. Any excess fuel will not be refunded."
+    },
+    {
+      question: "Are your tour packages customizable?",
+      answer: "Absolutely! We specialize in tailor-made itineraries. Simply contact us via WhatsApp with your preferences, and we will create a package that suits your schedule and interests."
+    },
+    {
+      question: "How do I confirm my booking?",
+      answer: "You can send an enquiry through our website or contact us directly on WhatsApp. Once we confirm availability, we will share the payment details to secure your booking."
+    },
+    {
+      question: "Is there a security deposit required?",
+      answer: "Yes, a nominal security deposit is required for vehicle rentals. This amount is fully refundable upon the safe return of the vehicle without any damage."
+    }
+  ];
+
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <section id="faq" className="py-24 bg-white relative">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <span className="text-konkan-amber font-bold tracking-widest text-sm uppercase mb-4 block">Got Questions?</span>
+          <h2 className="font-serif text-4xl md:text-5xl text-konkan-teal-dark mb-4">Frequently Asked Questions</h2>
+        </div>
+        
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div key={index} className="border border-gray-200 rounded-2xl overflow-hidden transition-all duration-300">
+              <button
+                className="w-full px-6 py-6 text-left flex justify-between items-center bg-gray-50/50 hover:bg-gray-50 focus:outline-none"
+                onClick={() => toggleFAQ(index)}
+              >
+                <span className="font-sans font-bold text-gray-900 text-lg pr-8">{faq.question}</span>
+                <span className={`w-8 h-8 flex items-center justify-center rounded-full bg-konkan-teal/10 text-konkan-teal transition-transform duration-300 ${openIndex === index ? 'rotate-90' : ''}`}>
+                  <ChevronRight className="w-5 h-5" />
+                </span>
+              </button>
+              <AnimatePresence>
+                {openIndex === index && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-white"
+                  >
+                    <div className="px-6 pb-6 pt-2 text-gray-600 leading-relaxed border-t border-gray-100">
+                      {faq.answer}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Testimonials() {
   const reviews = [
     { name: "Priya S.", location: "Pune", text: "Exceptional service! We rented a car for 3 days to explore Ratnagiri. The car was clean and the booking process via WhatsApp was incredibly smooth." },
@@ -941,7 +1014,7 @@ function InlineEnquiryForm() {
   };
 
   return (
-    <div className="bg-white rounded-[2.5rem] p-8 shadow-2xl border border-gray-100 h-full flex flex-col justify-center">
+    <div id="enquiry" className="bg-white rounded-[2.5rem] p-8 shadow-2xl border border-gray-100 h-full flex flex-col justify-center">
       <h3 className="font-serif text-3xl text-konkan-teal-dark font-bold mb-2">Send an Enquiry</h3>
       <p className="text-gray-500 mb-6 font-medium">We'll get back to you via WhatsApp.</p>
       
@@ -970,21 +1043,21 @@ function InlineEnquiryForm() {
           <label className="block text-sm font-medium text-gray-700 mb-1">Service Category</label>
           <select value={service} onChange={(e) => { setService(e.target.value); setSpecificService(""); }} required className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-konkan-amber focus:border-transparent transition-all bg-white">
             <option value="">Select Service Category</option>
-            <option value="Tour Package">Tour Packages</option>
+            <option value="Tour Package">Tour Packages (Travels)</option>
             <option value="Car Rental">Car Rentals</option>
-            <option value="Bike Rental">Bike Rentals</option>
+            <option value="Scooty Rental">Scooty Rentals</option>
           </select>
         </div>
 
         {service === "Tour Package" && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Specific Tour</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Specific Tour / Destination</label>
             <select value={specificService} onChange={(e) => setSpecificService(e.target.value)} required className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-konkan-amber focus:border-transparent transition-all bg-white">
-              <option value="">Select Tour</option>
-              <option value="Kokan Darshan">Kokan Darshan (3-5 Days)</option>
-              <option value="Ganpatipule Tour">Ganpatipule Special</option>
-              <option value="Malvan Tarkali Tour">Malvan & Tarkali Adventure</option>
-              <option value="Custom Tour">Custom Itinerary</option>
+              <option value="">Select Destination</option>
+              <option value="Ratnagiri">Ratnagiri</option>
+              <option value="Guhagar">Guhagar</option>
+              <option value="Malvan">Malvan</option>
+              <option value="North Goa">North Goa</option>
             </select>
           </div>
         )}
@@ -994,23 +1067,20 @@ function InlineEnquiryForm() {
             <label className="block text-sm font-medium text-gray-700 mb-1">Vehicle Type</label>
             <select value={specificService} onChange={(e) => setSpecificService(e.target.value)} required className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-konkan-amber focus:border-transparent transition-all bg-white">
               <option value="">Select Vehicle</option>
-              <option value="Toyota Innova">Toyota Innova (SUV)</option>
-              <option value="Maruti Swift Dzire">Swift Dzire (Sedan)</option>
-              <option value="Maruti Ertiga">Maruti Ertiga (MUV)</option>
-              <option value="Tempo Traveller">Tempo Traveller (Group)</option>
+              <option value="Maruti Ertiga">Maruti Ertiga</option>
+              <option value="Hyundai Aura">Hyundai Aura</option>
             </select>
           </div>
         )}
 
-        {service === "Bike Rental" && (
+        {service === "Scooty Rental" && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Bike Preference</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Scooty Preference</label>
             <select value={specificService} onChange={(e) => setSpecificService(e.target.value)} required className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-konkan-amber focus:border-transparent transition-all bg-white">
-              <option value="">Select Bike</option>
+              <option value="">Select Scooty</option>
               <option value="Honda Activa">Honda Activa</option>
+              <option value="Honda Aviator">Honda Aviator</option>
               <option value="TVS Jupiter">TVS Jupiter</option>
-              <option value="Ather 450X">Ather 450X (Electric)</option>
-              <option value="Royal Enfield">Royal Enfield</option>
             </select>
           </div>
         )}
@@ -1208,7 +1278,7 @@ function Footer() {
               <li><a href="#fleet" className="hover:text-konkan-gold transition-colors inline-block">Our Fleet</a></li>
               <li><a href="#destinations" className="hover:text-konkan-gold transition-colors inline-block">Top Destinations</a></li>
               <li><a href="#about" className="hover:text-konkan-gold transition-colors inline-block">Our Story</a></li>
-              <li><a href="#contact" className="hover:text-konkan-gold transition-colors inline-block">Book with Us</a></li>
+              <li><a href="#enquiry" className="hover:text-konkan-gold transition-colors inline-block">Book with Us</a></li>
             </ul>
           </div>
 
@@ -1364,6 +1434,7 @@ export default function App() {
         <Destinations />
         <MiniAttractions />
         <HowItWorks />
+        <FAQ />
         <Testimonials />
         <AboutAndContact />
       </main>
