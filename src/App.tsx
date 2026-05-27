@@ -455,6 +455,13 @@ function Fleet() {
     ],
     cars: [
       { 
+        name: "Ertiga Magma Grey Colour", 
+        type: "SUV / MUV",
+        features: ["7 Seats", "AC / Heater", "Manual Transmission"],
+        image: "https://imgd.aeplcdn.com/664x374/n/e1hs93a_1572129.jpg?q=80",
+        icon: Car
+      },
+      { 
         name: "Maruti Ertiga", 
         type: "SUV / MUV",
         features: ["7 Seats", "AC / Heater", "Manual Transmission"],
@@ -1067,6 +1074,7 @@ function InlineEnquiryForm() {
             <label className="block text-sm font-medium text-gray-700 mb-1">Vehicle Type</label>
             <select value={specificService} onChange={(e) => setSpecificService(e.target.value)} required className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-konkan-amber focus:border-transparent transition-all bg-white">
               <option value="">Select Vehicle</option>
+              <option value="Ertiga Magma Grey Colour">Ertiga Magma Grey Colour</option>
               <option value="Maruti Ertiga">Maruti Ertiga</option>
               <option value="Hyundai Aura">Hyundai Aura</option>
             </select>
@@ -1153,11 +1161,15 @@ function AboutAndContact() {
               </div>
               
               <div className="bg-konkan-sand p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
+                <div className="flex flex-col">
                   <p className="text-sm text-gray-500 font-medium mb-1">Direct Line / WhatsApp</p>
-                  <a href="tel:08237960809" className="flex items-center gap-3 text-konkan-teal-dark font-bold text-xl md:text-2xl hover:text-konkan-amber transition-colors">
+                  <a href="tel:08237960809" className="flex items-center gap-3 text-konkan-teal-dark font-bold text-xl hover:text-konkan-amber transition-colors mb-1">
                     <Phone className="w-5 h-5 text-konkan-amber" />
                     <span>08237960809</span>
+                  </a>
+                  <a href="tel:8855090809" className="flex items-center gap-3 text-konkan-teal-dark font-bold text-xl hover:text-konkan-amber transition-colors">
+                    <Phone className="w-5 h-5 text-konkan-amber" />
+                    <span>8855090809</span>
                   </a>
                 </div>
                 <div className="h-10 w-px bg-gray-300 hidden sm:block"></div>
@@ -1289,9 +1301,12 @@ function Footer() {
                 <MapPin className="w-5 h-5 text-konkan-amber shrink-0 mt-1" />
                 <span>Radhakrishna naka, Ram Ali Road, Belbag,<br/>Police Head Quarters, Ratnagiri,<br/>Maharashtra 415612</span>
               </li>
-              <li className="flex items-center gap-4">
-                <Phone className="w-5 h-5 text-konkan-amber shrink-0" />
-                <a href="tel:08237960809" className="font-medium hover:text-konkan-amber transition-colors">08237960809</a>
+              <li className="flex items-start gap-4">
+                <Phone className="w-5 h-5 text-konkan-amber shrink-0 mt-1" />
+                <div className="flex flex-col gap-1">
+                  <a href="tel:08237960809" className="font-medium hover:text-konkan-amber transition-colors">08237960809</a>
+                  <a href="tel:8855090809" className="font-medium hover:text-konkan-amber transition-colors">8855090809</a>
+                </div>
               </li>
             </ul>
           </div>
