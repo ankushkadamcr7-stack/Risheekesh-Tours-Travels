@@ -974,7 +974,7 @@ function Testimonials() {
           <h2 className="font-serif text-4xl md:text-5xl text-konkan-teal-dark mb-4">Traveler Stories</h2>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
           {reviews.map((review, idx) => (
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -1000,6 +1000,17 @@ function Testimonials() {
               </div>
             </motion.div>
           ))}
+        </div>
+        
+        <div className="text-center">
+          <a 
+            href="https://link.mapzoai.com/9adlbzel1rgf" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white border-2 border-konkan-amber text-konkan-amber font-bold rounded-xl hover:bg-konkan-amber hover:text-white transition-all duration-300 shadow-sm"
+          >
+            Leave a Review
+          </a>
         </div>
       </div>
     </section>
